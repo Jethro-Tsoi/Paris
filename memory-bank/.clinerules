@@ -1,0 +1,1 @@
+Look for patterns in the .clinerules file related to FinBERT models and 5-class sentiment classification. If not present, add appropriate rules and documentation about the 5-class implementation. 

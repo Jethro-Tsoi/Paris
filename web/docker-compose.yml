@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      target: development
+    ports:
+      - "8000:8000"  # FastAPI
+      - "8888:8888"  # Jupyter
+    volumes:
+      - ./backend:/app
+      - ../notebooks:/app/notebooks  # Mount notebooks directory
+      - ../data:/app/data  # Mount data directory
+      - /app/.venv  # Exclude virtual environment
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=development
+      - MODEL_PATH=/app/models
+      - JUPYTER_TOKEN=''  # No token required in development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app-network
+
+  # Development tools service (optional)
+  devtools:
+    build:
+      context: ./backend
+      target: development
+    command: /bin/bash
+    volumes:
+      - ./backend:/app
+      - ../notebooks:/app/notebooks
+      - ../data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=development
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    profiles:
+      - devtools
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  node_modules:
+  next:
+  venv:
