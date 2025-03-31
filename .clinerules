@@ -33,15 +33,19 @@
 - Validation for all inputs
 
 ### Model Training
-- LoRA configuration for Gamma 3 (r=8, alpha=16)
+- LoRA configuration for Gemma 3 (r=8, alpha=16)
 - Multi-metric early stopping for better quality
 - Comprehensive evaluation with multiple metrics
 - 5-class sentiment classification (STRONGLY_POSITIVE, POSITIVE, NEUTRAL, NEGATIVE, STRONGLY_NEGATIVE)
+- Consistent notebook structure across all model implementations
+- Similar hyperparameters across models for fair comparison
 
 ## Project Intelligence
 
 ### Critical Paths
 - Model training in notebooks/
+  - Gemma 3 implementation in 02a_gemma3_training_lora.ipynb
+  - FinBERT implementations in 02b_finbert_training.ipynb (3-class) and 02b_finbert_training_5labels.ipynb (5-class)
 - Backend API in web/backend/
 - Frontend interface in web/frontend/
 - Docker configuration for development environment
@@ -54,7 +58,7 @@
 
 ### Known Patterns
 - 5-class sentiment classification system (removed NOT_RELATED and UNCERTAIN classes)
-- Two model approach (Gamma 3 and FinBERT) for comparison, with Gemma 3 in progress
+- Two model approach (Gamma 3, and FinBERT) for comprehensive comparison
 - Both 3-class and 5-class FinBERT models maintained for performance comparison
 - Data labeling with Mistral AI API using KeyManager for multiple API keys
 - Resume-capable data labeling with progress tracking
@@ -67,6 +71,7 @@
 - Performance-focused model training
 
 ### Recent Evolution
+- Completed Gemma 3 implementation with LoRA fine-tuning in 02a_gemma3_training_lora.ipynb
 - Extended FinBERT to support 5-class sentiment classification
 - Added separate model directories for 3-class and 5-class models
 - Implemented label mapping serialization for consistent inference
@@ -91,7 +96,7 @@
 2. When fine-tuning foundation models, use parameter-efficient techniques like LoRA
 3. Quantitative evaluation should include multiple metrics (accuracy, F1, MCC, etc.)
 4. Maintain consistent evaluation methodology across all models for fair comparison
-5. Use Google's Gemma 3 12B as our primary model due to its superior performance on language understanding tasks
+5. Implement both Gamma 3 and Gemma 3 with LoRA for comprehensive comparison
 
 ## Code Organization
 1. Keep notebook code consistent between model implementations for easy comparison

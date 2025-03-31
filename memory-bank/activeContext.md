@@ -14,7 +14,7 @@ Financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT 
 - ✅ FinBERT model implementation for 3-class sentiment
 - ✅ FinBERT model implementation for 5-class sentiment
 - ✅ Multi-metric evaluation system
-- 🔄 Gemma 3 model implementation with LoRA (in progress)
+- ✅ Gemma 3 model implementation with LoRA fine-tuning
 
 ### 2. Web Application
 - ✅ FastAPI backend with model serving
@@ -66,6 +66,9 @@ Financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT 
 - feature/web-interface: Web application development
 
 ## Recent Updates
+- Train models using the newly labeled data
+- Complete data labeling of the stock_market_tweets dataset using the resume-capable approach
+- Implemented Gemma 3 model with LoRA fine-tuning in 02a_gemma3_training_lora.ipynb
 - Extended FinBERT model to support 5-class sentiment classification (STRONGLY_NEGATIVE, NEGATIVE, NEUTRAL, POSITIVE, STRONGLY_POSITIVE)
 - Added label mapping saving for FinBERT 5-class model to ensure consistent inference
 - Modified model output directory to separate 3-class and 5-class models
@@ -88,14 +91,12 @@ Financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT 
 - Improved build system and cleanup procedures
 
 ## Next Steps
-1. Complete data labeling of the stock_market_tweets dataset using the resume-capable approach
-2. Train models using the newly labeled data
-3. Complete Gemma 3 model implementation and training
-4. Compare performance between 3-class and 5-class FinBERT models
-5. Implement model versioning system
-6. Add model performance comparison visualization
-7. Implement real-time sentiment analysis API
-8. Add automated testing suite
+1. Complete model evaluation and comparison between Gemma 3 Finetune, and FinBERT models
+2. Compare performance between 3-class and 5-class FinBERT models
+3. Implement model versioning system
+4. Add model performance comparison visualization
+5. Implement real-time sentiment analysis API
+6. Add automated testing suite
 
 ## Technical Decisions
 1. Using 5-class sentiment labeling for more focused sentiment analysis
@@ -139,8 +140,7 @@ Additional:
 ## Key Project Files
 - `notebooks/00_data_labeling_with_resume.ipynb` - Enhanced data labeling using Mistral AI API with resume capability
 - `notebooks/00b_ner_stock_identification.ipynb` - NER and stock symbol detection
-- `notebooks/02a_gamma3_training_lora.ipynb` - Gamma 3 model training
-- `notebooks/02b_gemma3_training_lora.ipynb` - Gemma 3 model training
+- `notebooks/02a_gemma3_training_lora.ipynb` - Gemma 3 model training with LoRA
 - `notebooks/02b_finbert_training.ipynb` - FinBERT model training (3-class)
 - `notebooks/02b_finbert_training_5labels.ipynb` - FinBERT model training (5-class)
 - `web/backend/` - FastAPI backend implementation
@@ -149,13 +149,16 @@ Additional:
 - `docker-compose.yml` - Container configuration
 
 ## Current Focus
+- Comparing performance across all implemented models (FinBERT, Gamma 3)
 - Implementing and evaluating financial sentiment analysis models
 - Building a web interface for sentiment prediction
 - Supporting both 3-class and 5-class sentiment classification
-- Comparing different model architectures (FinBERT, Gamma 3, Gemma 3)
 - Developing robust data labeling and model training pipelines
 
 ## Recent Changes
+- Train models using the newly labeled data
+- Complete data labeling of the stock_market_tweets dataset using the resume-capable approach
+- Added Gemma 3 implementation with LoRA fine-tuning in 02a_gemma3_training_lora.ipynb
 - Modified FinBERT training to support 5-class sentiment classification
 - Updated the label mapping to: STRONGLY_NEGATIVE, NEGATIVE, NEUTRAL, POSITIVE, STRONGLY_POSITIVE
 - Changed model output directory to '../models/finbert_5labels' to avoid overwriting the 3-class model

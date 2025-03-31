@@ -11,8 +11,8 @@ The notebooks should be executed in the following order:
 3. `00c_data_labeling_with_stocks.ipynb` - (Optional) Labels tweets with verified stock symbols 
 4. `00_data_labeling.ipynb` - (Optional) Original data labeling without stock focus
 5. `02a_gamma3_training_lora.ipynb` - Trains the Gamma 3 model with LoRA fine-tuning
-6. `02b_finbert_training.ipynb` - Trains the FinBERT model
-7. `02b_gemma3_training_lora.ipynb` - Trains the Gemma 3 model with LoRA fine-tuning
+6. `02a_gemma3_training_lora.ipynb` - Trains the Gemma 3 model with LoRA fine-tuning
+7. `02b_finbert_training.ipynb` - Trains the FinBERT model
 
 ## Notebook Descriptions
 
@@ -50,17 +50,19 @@ The notebooks should be executed in the following order:
 - Includes multi-metric evaluation
 - Saves the trained model
 
+### 02a_gemma3_training_lora.ipynb
+- Implements Gemma 3 model with LoRA fine-tuning
+- Uses 8-bit quantization for efficient training
+- Configures LoRA parameters (r=8, alpha=16)
+- Targets q_proj and v_proj modules
+- Implements multi-metric evaluation and early stopping
+- Saves the trained adapter for efficient deployment
+
 ### 02b_finbert_training.ipynb
 - Implements FinBERT model training
 - Fine-tunes on financial tweet data
 - Includes evaluation metrics
-- Saves the trained model
-
-### 02b_gemma3_training_lora.ipynb
-- Implements Gemma 3 model with LoRA fine-tuning
-- Configures training parameters
-- Includes multi-metric evaluation
-- Saves the trained model
+- Saves the trained model for both 3-class and 5-class implementations
 
 ## Output Files
 
@@ -82,14 +84,18 @@ To run these notebooks, you'll need the following Python packages:
 - polars
 - transformers
 - torch
+- peft
+- accelerate
+- bitsandbytes (for 8-bit quantization)
 - yfinance
 - requests
 - tqdm
 - huggingface_hub
+- tensorboard (for training visualization)
 
 You can install them using:
 ```
-pip install pandas numpy polars transformers torch yfinance requests tqdm huggingface_hub
+pip install pandas numpy polars transformers torch peft accelerate bitsandbytes yfinance requests tqdm huggingface_hub tensorboard
 ```
 
 Additionally, you'll need:

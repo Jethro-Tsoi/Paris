@@ -1,1 +1,9 @@
-Look for patterns in the .clinerules file related to FinBERT models and 5-class sentiment classification. If not present, add appropriate rules and documentation about the 5-class implementation. 
+Look for patterns in the .clinerules file related to FinBERT models and Gemma 3 implementations, particularly the 5-class sentiment classification. 
+
+New patterns to document:
+1. Gemma 3 model uses LoRA fine-tuning similar to Gamma 3 with r=8, alpha=16
+2. All model implementations follow consistent notebook structure for better comparison
+3. All models implement multi-metric early stopping for improved quality
+4. The 5-class sentiment system is now standardized across all model implementations
+5. All models are trained with similar hyperparameters for fair comparison
+6. The naming convention for notebooks is consistent with 02a_ prefix for main model implementations 
