@@ -1,7 +1,6 @@
 # Ignore model checkpoints
 notebooks/finbert_results/checkpoint-*/
 !notebooks/finbert_results/checkpoint-latest/
-models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
