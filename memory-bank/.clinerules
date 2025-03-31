@@ -6,4 +6,34 @@ New patterns to document:
 3. All models implement multi-metric early stopping for improved quality
 4. The 5-class sentiment system is now standardized across all model implementations
 5. All models are trained with similar hyperparameters for fair comparison
-6. The naming convention for notebooks is consistent with 02a_ prefix for main model implementations 
+6. The naming convention for notebooks is consistent with 02a_ prefix for main model implementations
+7. The project follows a strict notebook execution order for reproducible results
+8. Data processing notebooks (00_*) handle different aspects of data preparation
+9. Model training notebooks (02_*) handle different model architectures but share common patterns
+10. Output files follow a consistent naming pattern and are organized in the data directory
+11. Model artifacts follow a consistent structure in the models directory with separate subdirectories
+12. The README.md in notebooks directory serves as the primary documentation for the notebooks
+13. Dependencies are documented in the README.md with explicit version requirements
+14. API key setup follows a consistent pattern with environment variables and key rotation
+15. 8-bit quantization is used for efficient training of large models
+16. The project name PARIS stands for Personalized AI-Advisor for Robo Investment Strategies
+17. The project follows a Docker-based development workflow with standardized Makefile commands
+18. Common model issues (Gemma 3 AttributeError, FinBERT column mismatch) are documented with fixes
+19. Gemma 3 models use "model_dim" instead of "hidden_size" for configuration
+20. The development environment provides consistent access points (localhost:3000, 8000, 8888)
+21. Python scripts are provided alongside notebooks for command-line execution
+22. The project has a clear structure with dedicated directories for data, models, notebooks, and web components
+23. Multiple solutions are provided for common issues (standalone scripts, notebook modifications, automated fixes)
+24. The main README.md provides comprehensive setup and usage instructions
+25. Fix scripts follow a consistent naming pattern (fix_*_notebook.py)
+26. The project includes additional directories not documented in the main README.md:
+   - scraper/ - For Twitter data scraping
+   - src/ - For core Python modules
+   - logs/ - For training and application logs
+   - example/ - For example implementations
+   - memory-bank/ - For Cline documentation
+   - tmp/ - For temporary files
+27. The web directory has its own docker-compose.yml for web-specific container configuration
+28. The project contains documentation beyond the main README.md, including TWITTER_API_README.md in the scraper directory
+29. Project configuration is maintained through various dotfiles (.env, .gitignore, .gitmessage)
+30. The scraper component is modular with its own requirements.txt for dependencies 

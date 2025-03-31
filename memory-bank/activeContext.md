@@ -1,7 +1,17 @@
 # Active Development Context
 
 ## Project Overview
-Financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT models with a modern web interface.
+PARIS: Personalized AI-Advisor for Robo Investment Strategies - A comprehensive financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT models with a modern web interface.
+
+## Key Features
+- 🤖 Multi-model sentiment analysis (Gemma 3, Gamma 3, and FinBERT)
+- 📊 Interactive performance visualization dashboard
+- 🔄 Real-time sentiment prediction
+- 🎯 5-class sentiment classification (STRONGLY_POSITIVE, POSITIVE, NEUTRAL, NEGATIVE, STRONGLY_NEGATIVE)
+- 📈 Comprehensive model evaluation metrics
+- 🚀 Modern web interface with TypeScript and Tailwind CSS
+- 🐳 Containerized development environment
+- ⚡ Resume-capable data labeling for large datasets
 
 ## Current Implementation Status
 
@@ -60,22 +70,128 @@ Financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT 
 - Jupyter notebook integration via `make jupyter`
 - Testing via `make test-backend` and `make test-frontend`
 
+## Project Structure
+```
+.
+├── data/                  # Data storage
+│   ├── models/           # Trained model files
+│   └── tweets/           # Raw and processed tweets
+├── example/              # Example projects
+│   └── CS6520-KOLs-Opinions-Sentiment-Classification-main/
+├── logs/                 # Log files
+│   └── gemma3_training/  # Gemma 3 training logs
+├── memory-bank/          # Project memory for Cline
+├── models/               # Trained model artifacts
+│   ├── gemma3/          # Gemma 3 model files
+│   │   ├── gemma3_lora_adapter_best/    # Best performing LoRA adapter
+│   │   ├── gemma3_lora_adapter_final/   # Final trained LoRA adapter
+│   │   ├── metrics.csv                  # Model evaluation metrics
+│   │   └── training_history.csv         # Training progress history
+│   └── finbert/         # FinBERT model files
+│       ├── model.safetensors           # Model weights
+│       ├── config.json                 # Model configuration
+│       ├── tokenizer.json              # Tokenizer configuration
+│       ├── vocab.txt                   # Vocabulary file
+│       └── metrics.csv                 # Model evaluation metrics
+├── notebooks/            # Jupyter notebooks
+│   ├── 00_data_labeling.ipynb                # Full data labeling
+│   ├── 00_data_labeling.py                   # Python script version of data labeling
+│   ├── 00_data_labeling_with_resume.ipynb    # Resume-capable data labeling with Mistral AI
+│   ├── 00_data_labeling_with_resume.py       # Python script for resume-capable data labeling
+│   ├── 00b_ner_stock_identification.ipynb    # NER and stock symbol detection
+│   ├── 00c_data_labeling_with_stocks.ipynb   # Stock-specific sentiment labeling
+│   ├── 01_data_preparation.ipynb             # Data preparation for model training
+│   ├── 02a_gemma3_training_lora.ipynb        # Gemma 3 training with LoRA
+│   ├── 02b_finbert_training.ipynb            # FinBERT training
+│   └── finbert_results/                      # FinBERT model results
+├── scraper/              # Twitter scraping tools
+│   ├── twitter_api.py               # Twitter API integration
+│   ├── test_crawler.py              # Crawler testing
+│   ├── TWITTER_API_README.md        # Documentation
+│   ├── crawler_config/              # Configuration files
+│   ├── validators/                  # Validation tools
+│   └── data/                        # Scraped data
+├── src/                  # Core Python modules
+│   ├── data_processor.py           # Data processing utilities
+│   └── evaluation/                 # Evaluation tools
+├── tmp/                  # Temporary files
+├── web/                  # Web application
+│   ├── backend/         # FastAPI backend
+│   ├── frontend/        # Next.js frontend
+│   ├── docker-compose.yml         # Container configuration for web
+│   └── README.md                  # Web-specific documentation
+├── .clinerules           # Cline rules file
+├── .env                  # Environment variables
+├── .env.example          # Example environment variables
+├── .gitignore            # Git ignore rules
+├── .gitmessage           # Git commit message template
+├── Dockerfile            # Main Dockerfile
+├── LICENSE               # Project license
+├── Makefile              # Development commands
+├── README.md             # Main project documentation
+└── requirements.txt      # Python dependencies
+```
+
+## Available Make Commands
+```bash
+make help      # Show all available commands
+make up        # Start all services
+make down      # Stop all services
+make build     # Build/rebuild services
+make dev       # Start with development tools
+make clean     # Remove all containers and volumes
+make logs      # View service logs
+make jupyter   # Start Jupyter notebook server
+make test-backend  # Run backend tests
+make test-frontend # Run frontend tests
+```
+
+## Development Environment
+The following services are available:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Documentation: http://localhost:8000/docs
+- Jupyter Notebooks: http://localhost:8888
+
 ## Current Working Branches
 - main: Primary development branch
 - feature/model-training: Model training implementations
 - feature/web-interface: Web application development
 
+## Notebook Execution Order
+The notebooks should be executed in the following order:
+1. `00b_ner_stock_identification.ipynb` - Processes raw tweets with NER and identifies stock symbols
+2. `00_data_labeling_with_resume.ipynb` - Labels tweets using Mistral AI API with resume capability 
+3. `00c_data_labeling_with_stocks.ipynb` - (Optional) Labels tweets with verified stock symbols
+4. `00_data_labeling.ipynb` - (Optional) Original data labeling without stock focus
+5. `01_data_preparation.ipynb` - Prepares data for model training
+6. `02a_gemma3_training_lora.ipynb` - Trains the Gemma 3 model with LoRA fine-tuning
+7. `02b_finbert_training.ipynb` - Trains the FinBERT model (supports both 3-class and 5-class variants)
+
 ## Recent Updates
-- Train models using the newly labeled data
-- Complete data labeling of the stock_market_tweets dataset using the resume-capable approach
+- Added project name: PARIS (Personalized AI-Advisor for Robo Investment Strategies)
+- Created comprehensive main README.md with project overview, setup instructions, and documentation
+- Added detailed information about common issues and their fixes
+- Added documentation for Gemma 3 AttributeError fixes
+- Added documentation for FinBERT column mismatch fixes
+- Created detailed README.md in notebooks directory documenting notebook execution order and descriptions
+- Organized notebooks in a clear execution sequence for reproducible results
+- Added comprehensive documentation for dependencies and required API keys
+- Documented output files generated by notebooks and their locations
+- Documented model artifacts structure in models directory
+- Improved Gemma 3 model training with 8-bit quantization for efficient training
+- Standardized LoRA parameters (r=8, alpha=16) targeting q_proj and v_proj modules 
+- Implemented multi-metric evaluation and early stopping consistently across models
+- Configured efficient model saving formats (safetensors for FinBERT models)
+- Added proper versioning for both 3-class and 5-class FinBERT implementations
+- Completed data labeling of the stock_market_tweets dataset using the resume-capable approach
 - Implemented Gemma 3 model with LoRA fine-tuning in 02a_gemma3_training_lora.ipynb
-- Extended FinBERT model to support 5-class sentiment classification (STRONGLY_NEGATIVE, NEGATIVE, NEUTRAL, POSITIVE, STRONGLY_POSITIVE)
+- Extended FinBERT model to support 5-class sentiment classification
 - Added label mapping saving for FinBERT 5-class model to ensure consistent inference
 - Modified model output directory to separate 3-class and 5-class models
 - Improved 5-class FinBERT model evaluation with proper confusion matrix visualization
 - Replaced OpenRouter Gemini 2.5 Pro API with Mistral AI API for sentiment labeling
 - Implemented resume-capable data labeling with the new notebook 00_data_labeling_with_resume.ipynb
-- Deprecated 01_data_preparation.ipynb in favor of 00_data_labeling_with_resume.ipynb
 - Added KeyManager class for handling multiple Mistral API keys with rotation
 - Added parallel processing with ThreadPoolExecutor for better performance
 - Restructured data labeling workflow to support resuming from previous runs
@@ -83,15 +199,50 @@ Financial sentiment analysis system using Google's Gemma 3, Gamma 3 and FinBERT 
 - Added stock symbol detection and verification step
 - Added Named Entity Recognition (NER) preprocessing
 - Modified data labeling to focus on stock-specific tweets
-- Added Gemma 3 model implementation with LoRA fine-tuning
 - Changed from Gemma 3 12B to more efficient Gemma 3 4B model
 - Restructured development environment to be Docker-centric
 - Replaced setup.sh with comprehensive Makefile
 - Added development tools container
 - Improved build system and cleanup procedures
 
+## Known Issues and Fixes
+
+### Gemma 3 AttributeError Fix
+When working with Gemma 3 models, you may encounter:
+```
+AttributeError: 'Gemma3Config' object has no attribute 'hidden_size'
+```
+
+Solution: Modify the code to check for multiple attribute names:
+```python
+if hasattr(base_model.config, "model_dim"):
+    hidden_dim = base_model.config.model_dim
+elif hasattr(base_model.config, "hidden_size"):
+    hidden_dim = base_model.config.hidden_size
+else:
+    # Default value for Gemma 3 models (4B model typically uses 4096)
+    hidden_dim = 4096
+```
+
+### FinBERT Column Mismatch Fix
+The FinBERT training notebook may expect columns `text` and `label`, but the dataset has `description` and `sentiment` columns.
+
+Solutions:
+1. Use the standalone Python script `finbert_training.py`
+2. Modify the notebook to map columns appropriately:
+```python
+df['text'] = df['description']
+sentiment_map = {
+    'NEGATIVE': 0,
+    'NEUTRAL': 1,
+    'POSITIVE': 2
+}
+df['label'] = df['sentiment'].map(sentiment_map)
+```
+3. Use the automated fix script `fix_finbert_notebook.py`
+
 ## Next Steps
-1. Complete model evaluation and comparison between Gemma 3 Finetune, and FinBERT models
+1. Complete model evaluation and comparison between Gemma 3, Gamma 3, and FinBERT models
 2. Compare performance between 3-class and 5-class FinBERT models
 3. Implement model versioning system
 4. Add model performance comparison visualization
@@ -129,6 +280,10 @@ Additional:
 - yfinance
 - Mistral AI API
 - huggingface_hub
+- peft
+- accelerate
+- bitsandbytes
+- tensorboard
 ```
 
 ## API Endpoints
@@ -138,45 +293,48 @@ Additional:
 - GET `/performance_comparison` - Model comparison
 
 ## Key Project Files
-- `notebooks/00_data_labeling_with_resume.ipynb` - Enhanced data labeling using Mistral AI API with resume capability
 - `notebooks/00b_ner_stock_identification.ipynb` - NER and stock symbol detection
+- `notebooks/00_data_labeling_with_resume.ipynb` - Enhanced data labeling using Mistral AI API with resume capability
+- `notebooks/00c_data_labeling_with_stocks.ipynb` - Labels tweets with verified stock symbols
+- `notebooks/01_data_preparation.ipynb` - Prepares data for model training
 - `notebooks/02a_gemma3_training_lora.ipynb` - Gemma 3 model training with LoRA
-- `notebooks/02b_finbert_training.ipynb` - FinBERT model training (3-class)
-- `notebooks/02b_finbert_training_5labels.ipynb` - FinBERT model training (5-class)
+- `notebooks/02b_finbert_training.ipynb` - FinBERT model training (supports both 3-class and 5-class)
 - `web/backend/` - FastAPI backend implementation
 - `web/frontend/` - Next.js frontend with TypeScript
 - `Makefile` - Development commands and workflow
 - `docker-compose.yml` - Container configuration
+- `finbert_training.py` - Standalone script for FinBERT training
+- `fix_finbert_notebook.py` - Script to fix column mismatch in FinBERT notebook
+
+## Key Output Files
+- `data/tweets_with_ner_and_stocks.csv` - All tweets with NER and stock symbol information
+- `data/tweets_with_verified_stocks.csv` - Filtered dataset with only tweets mentioning verified stock symbols
+- `data/labeled_stock_tweets.csv` - Main labeled dataset from the resume-capable approach
+- `data/labeled_stock_tweets_progress.json` - Progress tracking for resume capability
+- `data/stock_tweets_labeled.csv` - Tweets with verified stock symbols and their sentiment labels
+- `data/stock_tweets_for_training.csv` - Final dataset for model training
+- `data/stock_tweets_by_symbol.csv` - Expanded dataset for analysis by individual stock symbol
+
+## Model Artifacts Structure
+### Gemma 3 Model (`models/gemma3/`)
+- `gemma3_lora_adapter_best/` - Best performing LoRA adapter weights
+- `gemma3_lora_adapter_final/` - Final trained LoRA adapter weights
+- `metrics.csv` - Model evaluation metrics
+- `training_history.csv` - Training progress history
+
+### FinBERT Model (`models/finbert/` and `models/finbert_5labels/`)
+- `model.safetensors` - Model weights in safetensors format
+- `config.json` - Model configuration
+- `tokenizer.json` - Tokenizer configuration
+- `vocab.txt` - Vocabulary file
+- `metrics.csv` - Model evaluation metrics
 
 ## Current Focus
-- Comparing performance across all implemented models (FinBERT, Gamma 3)
+- Comparing performance across all implemented models (FinBERT, Gamma 3, Gemma 3)
 - Implementing and evaluating financial sentiment analysis models
 - Building a web interface for sentiment prediction
 - Supporting both 3-class and 5-class sentiment classification
 - Developing robust data labeling and model training pipelines
-
-## Recent Changes
-- Train models using the newly labeled data
-- Complete data labeling of the stock_market_tweets dataset using the resume-capable approach
-- Added Gemma 3 implementation with LoRA fine-tuning in 02a_gemma3_training_lora.ipynb
-- Modified FinBERT training to support 5-class sentiment classification
-- Updated the label mapping to: STRONGLY_NEGATIVE, NEGATIVE, NEUTRAL, POSITIVE, STRONGLY_POSITIVE
-- Changed model output directory to '../models/finbert_5labels' to avoid overwriting the 3-class model
-- Used 'description' column instead of 'text' for model input
-- Added code to save the label mapping for consistent inference
-- Updated model initialization and confusion matrix to handle 5 classes
-- Configured model training parameters (batch_size=16, learning_rate=1e-5, early_stopping_patience=3)
-- Maintained backward compatibility with existing 3-class model implementation
-- Developed improved data labeling workflow with resume capability
-
-## Next Steps
-- Complete evaluation of 5-class FinBERT model performance
-- Compare results between 3-class and 5-class models
-- Integrate 5-class model into the web interface
-- Update API to support both 3-class and 5-class predictions
-- Consider fine-tuning Gemma 3 with 5-class classification
-- Develop visualization components for model comparison
-- Implement model versioning system for tracking different configurations
 
 ## Active Decisions
 - Using separate directories for 3-class and 5-class models to maintain both versions

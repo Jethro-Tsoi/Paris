@@ -1,4 +1,4 @@
-# Financial Sentiment Analysis with LLMs
+# PARIS: Personalized AI-Advisor for Robo Investment Strategies
 
 This project implements a comprehensive financial sentiment analysis system using Google's Gemma 3 and FinBERT models, with a modern web interface for visualization and comparison.
 
