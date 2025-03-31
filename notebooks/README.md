@@ -10,9 +10,9 @@ The notebooks should be executed in the following order:
 2. `00_data_labeling_with_resume.ipynb` - Labels tweets using Mistral AI API with resume capability
 3. `00c_data_labeling_with_stocks.ipynb` - (Optional) Labels tweets with verified stock symbols 
 4. `00_data_labeling.ipynb` - (Optional) Original data labeling without stock focus
-5. `02a_gamma3_training_lora.ipynb` - Trains the Gamma 3 model with LoRA fine-tuning
+5. `01_data_preparation.ipynb` - Prepares data for model training
 6. `02a_gemma3_training_lora.ipynb` - Trains the Gemma 3 model with LoRA fine-tuning
-7. `02b_finbert_training.ipynb` - Trains the FinBERT model
+7. `02b_finbert_training.ipynb` - Trains the FinBERT model (supports both 3-class and 5-class variants)
 
 ## Notebook Descriptions
 
@@ -33,6 +33,11 @@ The notebooks should be executed in the following order:
 - Uses ThreadPoolExecutor for parallel processing
 - Periodically saves progress to allow resuming after interruptions
 
+### 00_data_labeling_with_resume.py
+- Python script version of the resume-capable data labeling
+- Provides command-line interface for batch processing
+- Supports the same features as the notebook version
+
 ### 00c_data_labeling_with_stocks.ipynb
 - Loads the preprocessed data with verified stock symbols
 - Labels the sentiment of each tweet
@@ -44,11 +49,15 @@ The notebooks should be executed in the following order:
 - Original data labeling notebook without stock symbol focus
 - Can be used if a broader sentiment analysis is needed
 
-### 02a_gamma3_training_lora.ipynb
-- Implements Gamma 3 model with LoRA fine-tuning
-- Configures training parameters
-- Includes multi-metric evaluation
-- Saves the trained model
+### 00_data_labeling.py
+- Python script version of the data labeling process
+- Provides command-line interface for batch processing
+
+### 01_data_preparation.ipynb
+- Prepares labeled data for model training
+- Performs preprocessing and filtering
+- Creates train/validation/test splits
+- Handles data format conversion for different models
 
 ### 02a_gemma3_training_lora.ipynb
 - Implements Gemma 3 model with LoRA fine-tuning
@@ -63,6 +72,12 @@ The notebooks should be executed in the following order:
 - Fine-tunes on financial tweet data
 - Includes evaluation metrics
 - Saves the trained model for both 3-class and 5-class implementations
+- Handles different dataset column names with appropriate mapping
+
+### finbert_results/
+- Contains evaluation results from FinBERT models
+- Includes confusion matrices, performance metrics
+- Stores model comparison data
 
 ## Output Files
 
@@ -75,6 +90,23 @@ The notebooks will generate various output files in the `../data/` directory:
 - `stock_tweets_labeled.csv` - Tweets with verified stock symbols and their sentiment labels
 - `stock_tweets_for_training.csv` - Final dataset for model training, excluding non-relevant tweets
 - `stock_tweets_by_symbol.csv` - Expanded dataset for analysis by individual stock symbol
+
+## Model Artifacts
+
+Trained models and their artifacts are saved in the `../models/` directory:
+
+### Gemma 3 Model (`../models/gemma3/`)
+- `gemma3_lora_adapter_best/` - Best performing LoRA adapter weights
+- `gemma3_lora_adapter_final/` - Final trained LoRA adapter weights
+- `metrics.csv` - Model evaluation metrics
+- `training_history.csv` - Training progress history
+
+### FinBERT Model (`../models/finbert/`)
+- `model.safetensors` - Model weights in safetensors format
+- `config.json` - Model configuration
+- `tokenizer.json` - Tokenizer configuration
+- `vocab.txt` - Vocabulary file
+- `metrics.csv` - Model evaluation metrics
 
 ## Required Dependencies
 

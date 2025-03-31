@@ -1,10 +1,10 @@
 # Financial Sentiment Analysis with LLMs
 
-This project implements a comprehensive financial sentiment analysis system using Google's Gamma 3, Gemma 3, and FinBERT models, with a modern web interface for visualization and comparison.
+This project implements a comprehensive financial sentiment analysis system using Google's Gemma 3 and FinBERT models, with a modern web interface for visualization and comparison.
 
 ## Features
 
-- 🤖 Multi-model sentiment analysis (Gamma 3, Gemma 3, and FinBERT)
+- 🤖 Multi-model sentiment analysis (Gemma 3 and FinBERT)
 - 📊 Interactive performance visualization dashboard
 - 🔄 Real-time sentiment prediction
 - 🎯 5-class sentiment classification (STRONGLY_POSITIVE, POSITIVE, NEUTRAL, NEGATIVE, STRONGLY_NEGATIVE)
@@ -77,14 +77,29 @@ The following services will be available:
 ├── data/                  # Data storage
 │   ├── models/           # Trained model files
 │   └── tweets/           # Raw and processed tweets
+├── models/               # Trained model artifacts
+│   ├── gemma3/          # Gemma 3 model files
+│   │   ├── gemma3_lora_adapter_best/    # Best performing LoRA adapter
+│   │   ├── gemma3_lora_adapter_final/   # Final trained LoRA adapter
+│   │   ├── metrics.csv                  # Model evaluation metrics
+│   │   └── training_history.csv         # Training progress history
+│   └── finbert/         # FinBERT model files
+│       ├── model.safetensors           # Model weights
+│       ├── config.json                 # Model configuration
+│       ├── tokenizer.json              # Tokenizer configuration
+│       ├── vocab.txt                   # Vocabulary file
+│       └── metrics.csv                 # Model evaluation metrics
 ├── notebooks/            # Jupyter notebooks
-│   ├── 00b_ner_stock_identification.ipynb  # NER and stock symbol detection
-│   ├── 00_data_labeling_with_resume.ipynb  # Resume-capable data labeling with Mistral AI
-│   ├── 00c_data_labeling_with_stocks.ipynb # Stock-specific sentiment labeling
-│   ├── 00_data_labeling.ipynb              # Original data labeling (optional)
-│   ├── 02a_gamma3_training_lora.ipynb      # Gamma 3 training
-│   ├── 02b_finbert_training.ipynb          # FinBERT training
-│   └── 02b_gemma3_training_lora.ipynb      # Gemma 3 training
+│   ├── 00_data_labeling.ipynb                # Full data labeling
+│   ├── 00_data_labeling.py                   # Python script version of data labeling
+│   ├── 00_data_labeling_with_resume.ipynb    # Resume-capable data labeling with Mistral AI
+│   ├── 00_data_labeling_with_resume.py       # Python script for resume-capable data labeling
+│   ├── 00b_ner_stock_identification.ipynb    # NER and stock symbol detection
+│   ├── 00c_data_labeling_with_stocks.ipynb   # Stock-specific sentiment labeling
+│   ├── 01_data_preparation.ipynb             # Data preparation for model training
+│   ├── 02a_gemma3_training_lora.ipynb        # Gemma 3 training with LoRA
+│   ├── 02b_finbert_training.ipynb            # FinBERT training
+│   └── finbert_results/                      # FinBERT model results
 ├── web/                  # Web application
 │   ├── backend/         # FastAPI backend
 │   └── frontend/        # Next.js frontend
@@ -114,27 +129,21 @@ MISTRAL_API_KEY_2=your_third_key
 
 ### Training Models
 
-1. Gamma 3 with LoRA:
-- Open `notebooks/02a_gamma3_training_lora.ipynb`
-- Features:
-  - LoRA fine-tuning (r=8, alpha=16)
-  - Multi-metric early stopping
-  - Comprehensive evaluation
-
-2. Gemma 3 with LoRA:
-- Open `notebooks/02b_gemma3_training_lora.ipynb`
+1. Gemma 3 with LoRA:
+- Open `notebooks/02a_gemma3_training_lora.ipynb`
 - Features:
   - 8-bit quantization
-  - LoRA fine-tuning
+  - LoRA fine-tuning (r=8, alpha=16)
   - Gradient clipping
   - Multi-metric monitoring
 
-3. FinBERT:
+2. FinBERT:
 - Open `notebooks/02b_finbert_training.ipynb`
 - Features:
   - Native fine-tuning
   - Early stopping
   - Performance metrics
+  - Support for both 3-class and 5-class models
 
 ## Development
 
