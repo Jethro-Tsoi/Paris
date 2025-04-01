@@ -184,4 +184,8 @@
 2. Configure Mistral AI API keys in environment variables
 3. Use resume capability for long-running labeling tasks
 4. Save progress regularly (every 100 samples processed)
-5. Monitor rate limiting and key rotation behavior 
+5. Monitor rate limiting and key rotation behavior
+
+# Project Intelligence (.clinerules)
+
+Capture project-specific patterns, preferences, and insights here. 

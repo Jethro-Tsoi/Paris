@@ -1,3 +1,7 @@
+# Project Brief: Paris
+
+Initial project brief. Needs population based on project goals and requirements.
+
 # Financial Sentiment Analysis Project Brief
 
 ## Project Summary

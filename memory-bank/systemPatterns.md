@@ -250,3 +250,9 @@ def sanitize_output(prediction: dict) -> dict:
         "label": clean_text(prediction["label"]),
         "confidence": min(max(prediction["confidence"], 0), 1)
     }
+
+```
+
+# System Patterns
+
+Needs documentation of system architecture, key decisions, and design patterns.

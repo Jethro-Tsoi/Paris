@@ -1,3 +1,7 @@
+# Active Context
+
+Initial context. Needs update with current focus, recent changes, and next steps.
+
 # Active Development Context
 
 ## Project Overview
@@ -25,6 +29,8 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies - A comprehensive 
 - ✅ FinBERT model implementation for 5-class sentiment
 - ✅ Multi-metric evaluation system
 - ✅ Gemma 3 model implementation with LoRA fine-tuning
+- ✅ Model comparison between Gemma 3 and FinBERT
+- ✅ Batch prediction with FinBERT on the complete dataset
 
 ### 2. Web Application
 - ✅ FastAPI backend with model serving
@@ -75,7 +81,10 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies - A comprehensive 
 .
 ├── data/                  # Data storage
 │   ├── models/           # Trained model files
-│   └── tweets/           # Raw and processed tweets
+│   ├── tweets/           # Raw and processed tweets
+│   ├── all_labeled_tweets.csv  # Complete labeled dataset
+│   ├── finbert_predictions_*.csv  # FinBERT predictions on full dataset
+│   └── test.csv          # Test dataset for model evaluation
 ├── example/              # Example projects
 │   └── CS6520-KOLs-Opinions-Sentiment-Classification-main/
 ├── logs/                 # Log files
@@ -103,6 +112,8 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies - A comprehensive 
 │   ├── 01_data_preparation.ipynb             # Data preparation for model training
 │   ├── 02a_gemma3_training_lora.ipynb        # Gemma 3 training with LoRA
 │   ├── 02b_finbert_training.ipynb            # FinBERT training
+│   ├── 03_model_comparison.ipynb             # Compare Gemma 3 and FinBERT models
+│   ├── 04_finbert_predictions.ipynb          # Generate predictions with FinBERT on full dataset
 │   └── finbert_results/                      # FinBERT model results
 ├── scraper/              # Twitter scraping tools
 │   ├── twitter_api.py               # Twitter API integration
@@ -167,8 +178,16 @@ The notebooks should be executed in the following order:
 5. `01_data_preparation.ipynb` - Prepares data for model training
 6. `02a_gemma3_training_lora.ipynb` - Trains the Gemma 3 model with LoRA fine-tuning
 7. `02b_finbert_training.ipynb` - Trains the FinBERT model (supports both 3-class and 5-class variants)
+8. `03_model_comparison.ipynb` - Compares Gemma 3 and FinBERT models on test data
+9. `04_finbert_predictions.ipynb` - Uses FinBERT to predict sentiment on the full dataset
 
 ## Recent Updates
+- Added new notebook 04_finbert_predictions.ipynb for generating predictions on all_labeled_tweets.csv
+- Implemented batch processing for efficient prediction on large datasets
+- Added detailed analysis of prediction distributions
+- Added comparison between original labels and predictions when available
+- Added timestamp-based file naming for prediction outputs
+- Added notebook 03_model_comparison.ipynb for comparing Gemma 3 and FinBERT
 - Added project name: PARIS (Personalized AI-Advisor for Robo Investment Strategies)
 - Created comprehensive main README.md with project overview, setup instructions, and documentation
 - Added detailed information about common issues and their fixes
@@ -329,12 +348,94 @@ Additional:
 - `vocab.txt` - Vocabulary file
 - `metrics.csv` - Model evaluation metrics
 
-## Current Focus
-- Comparing performance across all implemented models (FinBERT, Gamma 3, Gemma 3)
-- Implementing and evaluating financial sentiment analysis models
-- Building a web interface for sentiment prediction
-- Supporting both 3-class and 5-class sentiment classification
-- Developing robust data labeling and model training pipelines
+## Current Focus: FinBERT Backtest Implementation
+
+The current development focus is on implementing and improving the backtesting framework for FinBERT sentiment predictions to evaluate their effectiveness in potential trading strategies.
+
+### Recent Work on FinBERT Backtesting
+
+We've been working on a backtesting script located at `/Users/jethrotsoi/Git/Paris/backtest/final_backtest.py` that uses FinBERT sentiment predictions to simulate trading strategies. The key components of this work include:
+
+1. **Data Processing**: 
+   - Processing FinBERT prediction data from `data/finbert_predictions_20250401_125126.csv`
+   - Extracting ticker symbols from financial_info JSON-like column
+   - Identifying 2,890 unique tickers from 28,176 rows of data
+
+2. **Sentiment Analysis**:
+   - Analyzing sentiment distributions by ticker
+   - Found that NEUTRAL is the most common sentiment (70-80%)
+   - POSITIVE sentiment accounts for 10-20% of mentions
+   - NEGATIVE and STRONGLY_NEGATIVE sentiments are less common (2-10% and 0.5-2%)
+
+3. **Backtesting Strategy**:
+   - Implementing a sentiment-based trading strategy that creates trades on each individual sentiment signal
+   - Each position is held for 3 days
+   - Buy signals are generated for POSITIVE and STRONGLY_POSITIVE sentiments
+   - Sell signals are generated for NEGATIVE and STRONGLY_NEGATIVE sentiments
+   - Testing date range from March 1, 2025, to April 1, 2025
+   - Using yfinance to fetch historical price data
+
+4. **Performance Visualization**:
+   - Creating backtest_results_by_ticker.png with average returns and win rates per ticker
+   - Creating individual ticker analysis charts showing full period stats and trade performance
+   - Separate charts for sentiment analysis showing returns by sentiment type
+   - Saving detailed trade data and summary statistics to CSV files
+
+### Current Issues and Fixes
+
+1. **Individual Ticker Analysis Charts**:
+   - Fixed an issue where individual ticker analysis charts weren't being generated due to a naming mismatch in the condition checking
+   - Updated the code to check for 'period_return' instead of 'full_period_return'
+
+2. **Limited Ticker Coverage**:
+   - The script was initially limited to testing only the top 20 most mentioned tickers
+   - Some tickers like SPX and DXY are skipped due to unavailability in Yahoo Finance
+   - Implemented a more robust ticker handling system with proper error management
+
+3. **Timestamp Handling**:
+   - Enhanced timestamp parsing to handle the format "2022-10-11T16:00:05.958000+00:00"
+   - Implemented a flexible parsing approach with fallbacks for different timestamp formats
+
+### Current Status
+
+The backtest_finbert.py script has been improved and renamed to final_backtest.py, with the following enhancements:
+
+1. Better timestamp parsing and date range determination
+2. Improved ticker symbol extraction and processing
+3. Individual trade generation for each sentiment signal
+4. Enhanced visualization with individual ticker analysis charts
+5. Detailed performance metrics including:
+   - Period return
+   - Max drawdown
+   - Average daily return
+   - Return variance
+   - Average trade return
+   - Win rate
+   - Maximum gain and loss
+   - Trade counts by sentiment
+
+### Next Steps
+
+1. **Data Expansion**:
+   - Test with different date ranges to validate strategy robustness
+   - Process more tickers beyond the top 20 most mentioned
+
+2. **Strategy Refinement**:
+   - Experiment with different holding periods
+   - Test alternative signal filtering methods
+   - Implement position sizing strategies
+   - Add portfolio-level performance metrics
+
+3. **Analysis Enhancement**:
+   - Compare performance against market benchmarks
+   - Analyze correlation between sentiment and price movements
+   - Investigate sentiment lead/lag effects
+   - Evaluate sentiment signal strength vs. performance
+
+4. **Integration**:
+   - Connect backtesting results to the main dashboard
+   - Develop interactive strategy testing interface
+   - Add real-time strategy monitoring
 
 ## Active Decisions
 - Using separate directories for 3-class and 5-class models to maintain both versions

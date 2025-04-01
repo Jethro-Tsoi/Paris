@@ -15,6 +15,8 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies
 - [x] Data cleaning and preprocessing
 - [x] Dataset splitting for training and evaluation
 - [x] Comprehensive documentation of notebook execution order
+- [x] Batch prediction with FinBERT on the complete dataset
+- [x] Full dataset sentiment prediction and analysis
 
 ### Model Development
 - [x] FinBERT 3-class sentiment model implementation
@@ -29,6 +31,21 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies
 - [x] Consistent LoRA parameters (r=8, alpha=16)
 - [x] Multi-metric evaluation and early stopping
 - [x] Fixes for common model issues (Gemma 3 AttributeError, FinBERT column mismatch)
+- [x] Model comparison between Gemma 3 and FinBERT
+- [x] Batch inference for efficient prediction on large datasets
+
+### Backtesting Framework
+- [x] Backtesting script for FinBERT sentiment predictions
+- [x] Ticker extraction from financial_info JSON data
+- [x] Historical price data fetching with yfinance
+- [x] Trade generation based on sentiment signals
+- [x] Performance visualization with matplotlib
+- [x] Trade statistics calculation (returns, win rates)
+- [x] Ticker-specific analysis charts
+- [x] Sentiment-based performance analysis
+- [x] Detailed trade data export
+- [x] Timestamp parsing for signal timing
+- [x] Date range determination from available data
 
 ### Web Application
 - [x] Docker container setup for development
@@ -52,6 +69,15 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies
 
 ## In-Progress Features
 
+### Backtesting Enhancement
+- [ ] Expanded ticker coverage beyond top 20
+- [ ] Alternative holding period strategies
+- [ ] Position sizing implementation
+- [ ] Portfolio-level performance metrics
+- [ ] Benchmark comparison (market indices)
+- [ ] Sentiment strength vs performance correlation
+- [ ] Lead/lag effect analysis
+
 ### Model Development
 - [ ] Comprehensive model comparison across different architectures
 - [ ] Hyperparameter optimization for 5-class models
@@ -64,6 +90,7 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies
 - [ ] Model selection interface (3-class vs 5-class)
 - [ ] Batch prediction capabilities
 - [ ] Result history and tracking
+- [ ] Backtesting results visualization dashboard
 
 ### Documentation and Testing
 - [ ] Comprehensive API documentation
@@ -74,9 +101,30 @@ PARIS: Personalized AI-Advisor for Robo Investment Strategies
 
 ## Current Status
 
+The project has recently expanded to include a backtesting framework for evaluating FinBERT sentiment predictions in potential trading strategies. The backtesting script (`final_backtest.py`) processes sentiment predictions from the FinBERT model, extracts ticker symbols, fetches historical price data using yfinance, and simulates trades based on sentiment signals.
+
+Key achievements in the backtesting implementation:
+1. Successfully processed 28,176 rows from the FinBERT predictions CSV
+2. Extracted 2,890 unique ticker symbols from financial_info data
+3. Implemented a trading strategy that generates trades for each sentiment signal
+4. Developed visualization components for backtest results including:
+   - Average returns and win rates by ticker
+   - Individual ticker analysis charts
+   - Returns by sentiment type
+   - Trade counts by sentiment
+5. Fixed issues with individual ticker analysis charts
+6. Enhanced timestamp parsing to handle different formats
+7. Implemented robust ticker handling with proper error management
+
+The script now generates detailed statistics for each ticker, including period return, max drawdown, average daily return, return variance, trade performance metrics (average return, win rate, max gain/loss), and sentiment breakdown.
+
 The project PARIS (Personalized AI-Advisor for Robo Investment Strategies) has successfully implemented all planned model architectures including both 3-class and 5-class sentiment classification models using FinBERT, as well as LoRA fine-tuning for Gamma 3 and Gemma 3. The 5-class models extend the original implementation to provide more granular sentiment analysis with STRONGLY_NEGATIVE, NEGATIVE, NEUTRAL, POSITIVE, and STRONGLY_POSITIVE classifications.
 
 The Gemma 3 implementation with LoRA fine-tuning has been completed in 02a_gemma3_training_lora.ipynb, adding another powerful model architecture to compare with FinBERT and Gamma 3. All models are now implemented with consistent evaluation metrics and early stopping mechanisms.
+
+A comprehensive model comparison between Gemma 3 and FinBERT has been implemented in 03_model_comparison.ipynb, evaluating both models on accuracy, precision, recall, F1 score, Cohen's kappa, Matthews correlation coefficient, ROC-AUC score, and inference speed. The comparison includes visualizations like bar charts for metrics and confusion matrices for detailed analysis.
+
+Additionally, a new notebook 04_finbert_predictions.ipynb has been created to generate predictions on the full all_labeled_tweets.csv dataset using the fine-tuned FinBERT model. This notebook implements efficient batch processing for large datasets, adds detailed analysis of prediction distributions, compares predictions with original labels when available, and uses timestamp-based file naming for prediction outputs.
 
 The training process uses similar hyperparameters across models for fair comparison, with early stopping based on validation metrics. All models can coexist in the project, allowing for comparative analysis of performance and use cases.
 
@@ -117,12 +165,14 @@ The project follows a structured notebook execution order for reproducible resul
 5. `01_data_preparation.ipynb` - Data preparation for model training
 6. `02a_gemma3_training_lora.ipynb` - Gemma 3 model training
 7. `02b_finbert_training.ipynb` - FinBERT model training (both variants)
+8. `03_model_comparison.ipynb` - Compare Gemma 3 and FinBERT performance
+9. `04_finbert_predictions.ipynb` - Generate predictions on the full dataset
 
 ## Known Issues and Fixes
 
 ### Gemma 3 AttributeError Fix
 When working with Gemma 3 models, you may encounter:
-```
+```python
 AttributeError: 'Gemma3Config' object has no attribute 'hidden_size'
 ```
 
@@ -159,6 +209,7 @@ The project generates several key output files in the data directory:
 - Labeled tweets with sentiment classifications
 - Progress tracking files for resume capability
 - Training datasets for different model architectures
+- Prediction outputs from the FinBERT model on the full dataset (finbert_predictions_*.csv)
 
 Model artifacts are saved in the models directory with separate subdirectories for different model architectures:
 - Gemma 3 model with LoRA adapter weights
@@ -203,3 +254,7 @@ Key directories and their purposes:
 7. **memory-bank/** - Maintains project knowledge and documentation for Cline
 
 This structure supports the complete workflow from data collection to model training and deployment.
+
+# Progress
+
+Needs update on what works, what's left, current status, and known issues.

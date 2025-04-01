@@ -1,4 +1,6 @@
-# Technical Context
+# Tech Context
+
+Needs details on technologies, setup, constraints, and dependencies.
 
 ## Development Environment
 

@@ -36,4 +36,31 @@ New patterns to document:
 27. The web directory has its own docker-compose.yml for web-specific container configuration
 28. The project contains documentation beyond the main README.md, including TWITTER_API_README.md in the scraper directory
 29. Project configuration is maintained through various dotfiles (.env, .gitignore, .gitmessage)
-30. The scraper component is modular with its own requirements.txt for dependencies 
+30. The scraper component is modular with its own requirements.txt for dependencies
+31. Model comparison notebooks (03_*) provide detailed analysis and visualization of model performance
+32. Prediction notebooks (04_*) focus on applying trained models to larger datasets
+33. Batch processing is implemented for efficient prediction on large datasets
+34. Output files use timestamp-based naming for clarity and version tracking
+35. Analysis of prediction distributions is included in prediction notebooks
+36. The standard prediction output includes confidence scores for each sentiment class 
+
+# Backtesting Framework Patterns
+37. The backtest directory contains scripts for backtesting sentiment predictions
+38. The final_backtest.py script is the main implementation for sentiment-based strategy testing
+39. Backtest scripts extract ticker symbols from the financial_info JSON-like field in predictions
+40. The backtesting framework uses yfinance for fetching historical price data
+41. Backtesting results are visualized with matplotlib in multiple chart types
+42. The backtest output is organized in the results/ subdirectory with consistent naming
+43. Trade details are saved in CSV format for each ticker (trades_TICKER.csv)
+44. A summary of all backtest results is saved in backtest_summary.csv
+45. The backtesting strategy uses a 3-day holding period for each sentiment signal
+46. Positive sentiments (POSITIVE, STRONGLY_POSITIVE) generate BUY signals
+47. Negative sentiments (NEGATIVE, STRONGLY_NEGATIVE) generate SELL signals
+48. NEUTRAL sentiments are skipped in the trading strategy
+49. Individual ticker analysis charts show both full period stats and trade performance
+50. Sentiment analysis charts show performance by sentiment type
+51. Timestamp parsing supports multiple formats including ISO 8601
+52. The script includes extensive error handling for missing data and invalid inputs
+53. The backtest script limits processing to top tickers by default to manage processing time
+54. Performance metrics include both trade-specific metrics and full period statistics
+55. The visualization includes color coding (green/red) based on positive/negative performance 
