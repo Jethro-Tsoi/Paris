@@ -593,6 +593,150 @@ def plot_backtest_results(results):
     if all_trades:
         all_trades_df = pd.concat(all_trades, ignore_index=True)
         
+        # Calculate overall performance metrics
+        overall_results = {
+            'total_trades': len(all_trades_df),
+            'avg_return': all_trades_df['returns_pct'].mean(),
+            'median_return': all_trades_df['returns_pct'].median(),
+            'win_rate': (all_trades_df['returns_pct'] > 0).mean() * 100,
+            'max_gain': all_trades_df['returns_pct'].max(),
+            'max_loss': all_trades_df['returns_pct'].min(),
+            'total_return': all_trades_df['returns_pct'].sum(),
+            'sentiment_counts': all_trades_df['sentiment'].value_counts().to_dict()
+        }
+        
+        # Display overall performance
+        print("\nOverall Trade Performance (All Tickers):")
+        print(f"  - Total trades: {overall_results['total_trades']}")
+        print(f"  - Average return: {overall_results['avg_return']:.2f}%")
+        print(f"  - Median return: {overall_results['median_return']:.2f}%")
+        print(f"  - Win rate: {overall_results['win_rate']:.2f}%")
+        print(f"  - Max gain: {overall_results['max_gain']:.2f}%")
+        print(f"  - Max loss: {overall_results['max_loss']:.2f}%")
+        print(f"  - Total return from all trades: {overall_results['total_return']:.2f}%")
+        
+        # Plot overall performance metrics
+        plt.figure(figsize=(12, 8))
+        
+        overall_metrics = [
+            ('Avg Return', overall_results['avg_return']),
+            ('Median Return', overall_results['median_return']),
+            ('Win Rate', overall_results['win_rate']),
+            ('Max Gain', overall_results['max_gain']),
+            ('Max Loss', overall_results['max_loss'])
+        ]
+        
+        metric_names = [m[0] for m in overall_metrics]
+        metric_values = [m[1] for m in overall_metrics]
+        
+        bars = plt.bar(metric_names, metric_values)
+        
+        # Color bars
+        for i, bar in enumerate(bars):
+            if i == 4:  # Max Loss is always negative
+                bar.set_color('red')
+            elif metric_values[i] >= 0:
+                bar.set_color('green')
+            else:
+                bar.set_color('red')
+                
+        # Add value labels on top of bars
+        for i, v in enumerate(metric_values):
+            plt.text(i, v + 0.1 if v >= 0 else v - 2, f'{v:.2f}%', 
+                    ha='center', va='bottom' if v >= 0 else 'top')
+        
+        plt.title(f'Overall Trade Performance ({overall_results["total_trades"]} Trades)')
+        plt.ylabel('Value (%)')
+        plt.axhline(y=0, color='r', linestyle='-')
+        plt.grid(axis='y', linestyle='--', alpha=0.7)
+        
+        plt.tight_layout()
+        plt.savefig(f'{output_dir}/overall_performance.png')
+        print(f"Plot saved to {output_dir}/overall_performance.png")
+        plt.close()
+        
+        # Group by sentiment and calculate detailed performance metrics
+        sentiment_performance = {}
+        for sentiment in all_trades_df['sentiment'].unique():
+            sentiment_trades = all_trades_df[all_trades_df['sentiment'] == sentiment]
+            sentiment_performance[sentiment] = {
+                'total_trades': len(sentiment_trades),
+                'avg_return': sentiment_trades['returns_pct'].mean(),
+                'median_return': sentiment_trades['returns_pct'].median(),
+                'win_rate': (sentiment_trades['returns_pct'] > 0).mean() * 100,
+                'max_gain': sentiment_trades['returns_pct'].max(),
+                'max_loss': sentiment_trades['returns_pct'].min(),
+                'total_return': sentiment_trades['returns_pct'].sum()
+            }
+            
+        # Display sentiment-based performance
+        print("\nPerformance by Sentiment:")
+        for sentiment, stats in sentiment_performance.items():
+            print(f"\n{sentiment} ({stats['total_trades']} trades):")
+            print(f"  - Average return: {stats['avg_return']:.2f}%")
+            print(f"  - Median return: {stats['median_return']:.2f}%")
+            print(f"  - Win rate: {stats['win_rate']:.2f}%")
+            print(f"  - Total return: {stats['total_return']:.2f}%")
+        
+        # Sort sentiments for consistent plotting
+        sentiment_order = {
+            'STRONGLY_POSITIVE': 0,
+            'POSITIVE': 1,
+            'NEGATIVE': 2,
+            'STRONGLY_NEGATIVE': 3
+        }
+        
+        sentiments = list(sentiment_performance.keys())
+        sentiments.sort(key=lambda x: sentiment_order.get(x, 99))
+        
+        # Plot key metrics by sentiment
+        metrics_to_plot = ['avg_return', 'median_return', 'win_rate']
+        colors = {
+            'avg_return': 'blue',
+            'median_return': 'green',
+            'win_rate': 'orange'
+        }
+        
+        plt.figure(figsize=(14, 10))
+        
+        for i, metric in enumerate(metrics_to_plot):
+            plt.subplot(len(metrics_to_plot), 1, i+1)
+            
+            values = [sentiment_performance[s][metric] for s in sentiments]
+            bars = plt.bar(sentiments, values)
+            
+            # Color bars based on sentiment
+            sentiment_colors = {
+                'STRONGLY_POSITIVE': 'darkgreen',
+                'POSITIVE': 'green',
+                'NEGATIVE': 'red',
+                'STRONGLY_NEGATIVE': 'darkred'
+            }
+            
+            for j, bar in enumerate(bars):
+                bar.set_color(sentiment_colors.get(sentiments[j], 'blue'))
+                
+            # Add value labels
+            for j, v in enumerate(values):
+                plt.text(j, v + 0.1 if v >= 0 else v - 2, f'{v:.2f}%', 
+                        ha='center', va='bottom' if v >= 0 else 'top')
+            
+            metric_display_name = metric.replace('_', ' ').title()
+            plt.title(f'{metric_display_name} by Sentiment')
+            plt.ylabel('Value (%)')
+            
+            if metric != 'win_rate':
+                plt.axhline(y=0, color='r', linestyle='-')
+            else:
+                plt.axhline(y=50, color='r', linestyle='-')
+                
+            plt.grid(axis='y', linestyle='--', alpha=0.7)
+        
+        plt.tight_layout()
+        plt.savefig(f'{output_dir}/performance_by_sentiment.png')
+        print(f"Plot saved to {output_dir}/performance_by_sentiment.png")
+        plt.close()
+        
         # Group by sentiment and calculate average returns
         sentiment_groups = all_trades_df.groupby('sentiment')
         sentiment_stats = sentiment_groups.agg({
@@ -606,13 +750,6 @@ def plot_backtest_results(results):
         counts = sentiment_stats['ticker']['count'].values
         
         # Sort by sentiment type (strongly positive -> strongly negative)
-        sentiment_order = {
-            'STRONGLY_POSITIVE': 0,
-            'POSITIVE': 1,
-            'NEGATIVE': 2,
-            'STRONGLY_NEGATIVE': 3
-        }
-        
         sorted_idx = sorted(range(len(sentiments)), key=lambda i: sentiment_order.get(sentiments[i], 99))
         sorted_sentiments = [sentiments[i] for i in sorted_idx]
         sorted_returns = [returns[i] for i in sorted_idx]
@@ -688,6 +825,17 @@ def plot_backtest_results(results):
     summary_df = pd.DataFrame(summary_data)
     summary_df.to_csv(f'{output_dir}/backtest_summary.csv', index=False)
     print(f"Summary saved to {output_dir}/backtest_summary.csv")
+    
+    # Save the overall performance results
+    if 'overall_results' in locals():
+        overall_df = pd.DataFrame([overall_results])
+        overall_df.to_csv(f'{output_dir}/overall_performance.csv', index=False)
+        print(f"Overall performance saved to {output_dir}/overall_performance.csv")
+        
+        # Save sentiment performance breakdown
+        sentiment_df = pd.DataFrame.from_dict(sentiment_performance, orient='index')
+        sentiment_df.to_csv(f'{output_dir}/sentiment_performance.csv')
+        print(f"Sentiment performance saved to {output_dir}/sentiment_performance.csv")
     
     # Save detailed trade data for each ticker
     for ticker, result in results.items():
