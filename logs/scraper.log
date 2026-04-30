@@ -1,0 +1,95 @@
+2025-04-08 23:08:57,082 - INFO - Checking environment setup...
+2025-04-08 23:08:57,082 - INFO - Environment check completed, starting main process...
+2025-04-08 23:08:57,082 - INFO - Starting X (Twitter) scraping process...
+2025-04-08 23:08:57,082 - INFO - Note: X API v2 limits access to a maximum of 3200 most recent tweets per user
+2025-04-08 23:08:57,082 - INFO - Free tier limits: 100 reads per month, 500 posts per month
+2025-04-08 23:08:57,082 - INFO - Rate limits initialized
+2025-04-08 23:08:57,084 - INFO - Loaded 70 accounts from account.csv
+2025-04-08 23:08:57,084 - INFO - Found 70 accounts to process: markminervini, daytrend, chamath, stoolpresidente, olvelez007, bbands, timothysykes, elonmusk, CathieDWood, wolfofwallst, KayKilbride, errol_coleman, raja1, BrianFeroldi, morganhousel, LizAnnSonders, fluentinfinance, iancassel, accentinvesting, awealthofcs, deepakshenoy, ajay_bagga, grahamstephan, michaelbatnick, arunstockguru, abnormalreturns, mashranivivek, investmattallen, valuestockgeek, investmenttalkk, lti_finance, petermallouk, gunavanthvaid, value_invest12, cathyhc, emmetlsavage, rwohlner, barbfriedberg, rossbaird, franseegull, arun_kumar_r, joelsolomon, coachchadcarson, lisagreenhall, andrewbeebe, financialmentor, kcicoletti, jessmatthewsca, iDesignStrategy, AswathDamodaran, EddyElfenbein, matt_levine, TheStalwart, tracyalloway, BillBrewsterTBB, buccocapital, Citrini7, MikeFritzell, RodAlzmann, CDInewsletter, ToffCap, StockJabber, MebFaber, EricBalchunas, profplum99, laurenbalik, lhamtil, Logos_LP, jonathanmaze, jasonschreier
+2025-04-08 23:08:57,084 - INFO - Monthly quota reset. Next reset on 2025-05-01
+2025-04-08 23:08:57,085 - WARNING - Can only process 3 accounts with available quota
+2025-04-08 23:08:57,085 - INFO - Processing 3 accounts with 3200 tweets per account
+2025-04-08 23:08:57,085 - INFO - Starting to scrape tweets for @markminervini
+2025-04-08 23:08:57,086 - INFO - Fetching tweets for @markminervini since ID 1884707172040241617
+2025-04-08 23:08:57,388 - ERROR - Tweepy error occurred for @markminervini: 401 Unauthorized
+Unauthorized
+2025-04-08 23:08:57,388 - INFO - No new tweets found for @markminervini
+2025-04-08 23:08:57,388 - INFO - Completed scraping for @markminervini
+2025-04-08 23:08:57,388 - INFO - Progress: 1/70 accounts processed
+2025-04-08 23:08:57,389 - INFO - Starting to scrape tweets for @daytrend
+2025-04-08 23:08:57,389 - INFO - Fetching all available tweets for @daytrend (limited to 3200)
+2025-04-08 23:08:57,585 - ERROR - Tweepy error occurred for @daytrend: 401 Unauthorized
+Unauthorized
+2025-04-08 23:08:57,587 - INFO - No new tweets found for @daytrend
+2025-04-08 23:08:57,587 - INFO - Completed scraping for @daytrend
+2025-04-08 23:08:57,587 - INFO - Progress: 2/70 accounts processed
+2025-04-08 23:08:57,587 - INFO - Starting to scrape tweets for @chamath
+2025-04-08 23:08:57,587 - INFO - Fetching all available tweets for @chamath (limited to 3200)
+2025-04-08 23:08:57,783 - ERROR - Tweepy error occurred for @chamath: 401 Unauthorized
+Unauthorized
+2025-04-08 23:08:57,785 - INFO - No new tweets found for @chamath
+2025-04-08 23:08:57,785 - INFO - Completed scraping for @chamath
+2025-04-08 23:08:57,785 - INFO - Progress: 3/70 accounts processed
+2025-04-08 23:08:57,785 - INFO - Scraping process completed.
+2025-04-08 23:08:57,785 - INFO - Monthly quota usage: 0/100 reads
+2025-04-08 23:09:59,615 - INFO - Checking environment setup...
+2025-04-08 23:09:59,615 - INFO - Environment check completed, starting main process...
+2025-04-08 23:09:59,615 - INFO - Starting X (Twitter) scraping process...
+2025-04-08 23:09:59,615 - INFO - Note: X API v2 limits access to a maximum of 3200 most recent tweets per user
+2025-04-08 23:09:59,615 - INFO - Free tier limits: 100 reads per month, 500 posts per month
+2025-04-08 23:09:59,615 - INFO - Rate limits initialized
+2025-04-08 23:09:59,617 - INFO - Loaded 70 accounts from account.csv
+2025-04-08 23:09:59,617 - INFO - Found 70 accounts to process: markminervini, daytrend, chamath, stoolpresidente, olvelez007, bbands, timothysykes, elonmusk, CathieDWood, wolfofwallst, KayKilbride, errol_coleman, raja1, BrianFeroldi, morganhousel, LizAnnSonders, fluentinfinance, iancassel, accentinvesting, awealthofcs, deepakshenoy, ajay_bagga, grahamstephan, michaelbatnick, arunstockguru, abnormalreturns, mashranivivek, investmattallen, valuestockgeek, investmenttalkk, lti_finance, petermallouk, gunavanthvaid, value_invest12, cathyhc, emmetlsavage, rwohlner, barbfriedberg, rossbaird, franseegull, arun_kumar_r, joelsolomon, coachchadcarson, lisagreenhall, andrewbeebe, financialmentor, kcicoletti, jessmatthewsca, iDesignStrategy, AswathDamodaran, EddyElfenbein, matt_levine, TheStalwart, tracyalloway, BillBrewsterTBB, buccocapital, Citrini7, MikeFritzell, RodAlzmann, CDInewsletter, ToffCap, StockJabber, MebFaber, EricBalchunas, profplum99, laurenbalik, lhamtil, Logos_LP, jonathanmaze, jasonschreier
+2025-04-08 23:09:59,617 - INFO - Monthly quota reset. Next reset on 2025-05-01
+2025-04-08 23:09:59,617 - WARNING - Can only process 3 accounts with available quota
+2025-04-08 23:09:59,617 - INFO - Processing 3 accounts with 3200 tweets per account
+2025-04-08 23:09:59,617 - INFO - Starting to scrape tweets for @markminervini
+2025-04-08 23:09:59,617 - INFO - Fetching tweets for @markminervini since ID 1884707172040241617
+2025-04-08 23:09:59,972 - INFO - Found user ID for @markminervini: 105353526
+2025-04-08 23:09:59,972 - DEBUG - user_timeline: 1 requests remaining until Tue Apr  8 23:24:59 2025
+2025-04-08 23:09:59,973 - INFO - Requesting 100 tweets for @markminervini (page 1/32)
+2025-04-08 23:10:00,584 - INFO - Processing page 1 for @markminervini
+2025-04-08 23:10:00,585 - INFO - Fetched 93 tweets from page 1 for @markminervini (Total: 93/3200)
+2025-04-08 23:10:00,585 - INFO - Saving batch of 93 tweets for @markminervini
+2025-04-08 23:10:00,586 - INFO - Saved 93 tweets for @markminervini to ../data/tweets/markminervini_tweets.csv
+2025-04-08 23:10:02,590 - DEBUG - user_timeline: 1 requests remaining until Tue Apr  8 23:24:59 2025
+2025-04-08 23:10:02,591 - INFO - Requesting 100 tweets for @markminervini (page 2/32)
+2025-04-08 23:21:56,907 - INFO - Checking environment setup...
+2025-04-08 23:21:56,907 - INFO - Environment check completed, starting main process...
+2025-04-08 23:21:56,907 - INFO - Starting X (Twitter) scraping process...
+2025-04-08 23:21:56,907 - INFO - Note: X API v2 limits access to a maximum of 3200 most recent tweets per user
+2025-04-08 23:21:56,907 - INFO - Free tier limits: 100 reads per month, 500 posts per month
+2025-04-08 23:21:56,907 - INFO - Rate limits initialized
+2025-04-08 23:21:56,909 - INFO - Loaded 70 accounts from account.csv
+2025-04-08 23:21:56,909 - INFO - Found 70 accounts to process: markminervini, daytrend, chamath, stoolpresidente, olvelez007, bbands, timothysykes, elonmusk, CathieDWood, wolfofwallst, KayKilbride, errol_coleman, raja1, BrianFeroldi, morganhousel, LizAnnSonders, fluentinfinance, iancassel, accentinvesting, awealthofcs, deepakshenoy, ajay_bagga, grahamstephan, michaelbatnick, arunstockguru, abnormalreturns, mashranivivek, investmattallen, valuestockgeek, investmenttalkk, lti_finance, petermallouk, gunavanthvaid, value_invest12, cathyhc, emmetlsavage, rwohlner, barbfriedberg, rossbaird, franseegull, arun_kumar_r, joelsolomon, coachchadcarson, lisagreenhall, andrewbeebe, financialmentor, kcicoletti, jessmatthewsca, iDesignStrategy, AswathDamodaran, EddyElfenbein, matt_levine, TheStalwart, tracyalloway, BillBrewsterTBB, buccocapital, Citrini7, MikeFritzell, RodAlzmann, CDInewsletter, ToffCap, StockJabber, MebFaber, EricBalchunas, profplum99, laurenbalik, lhamtil, Logos_LP, jonathanmaze, jasonschreier
+2025-04-08 23:21:56,909 - INFO - Monthly quota reset. Next reset on 2025-05-01
+2025-04-08 23:21:56,909 - WARNING - Can only process 3 accounts with available quota
+2025-04-08 23:21:56,909 - INFO - Processing 3 accounts with 3200 tweets per account
+2025-04-08 23:21:56,909 - INFO - Starting to scrape tweets for @markminervini
+2025-04-08 23:21:56,910 - INFO - Fetching tweets for @markminervini since ID 1907864990343901596
+2025-04-08 23:21:57,185 - INFO - Found user ID for @markminervini: 105353526
+2025-04-08 23:21:57,186 - DEBUG - user_timeline: 1 requests remaining until Tue Apr  8 23:36:56 2025
+2025-04-08 23:21:57,186 - INFO - Requesting 100 tweets for @markminervini (page 1/32)
+2025-04-09 17:49:32,114 - ERROR - Bearer Token not found. Please set the BEARER_TOKEN environment variable.
+2025-04-09 17:50:59,915 - INFO - Checking environment setup...
+2025-04-09 17:50:59,916 - INFO - Environment check completed, starting main process...
+2025-04-09 17:50:59,916 - INFO - Starting X (Twitter) scraping process...
+2025-04-09 17:50:59,916 - INFO - Note: X API v2 limits access to a maximum of 3200 most recent tweets per user
+2025-04-09 17:50:59,917 - INFO - Free tier limits: 100 reads per month, 500 posts per month
+2025-04-09 17:50:59,917 - INFO - Rate limits initialized
+2025-04-09 17:50:59,922 - INFO - Loaded 70 accounts from account.csv
+2025-04-09 17:50:59,922 - INFO - Found 70 accounts to process: markminervini, daytrend, chamath, stoolpresidente, olvelez007, bbands, timothysykes, elonmusk, CathieDWood, wolfofwallst, KayKilbride, errol_coleman, raja1, BrianFeroldi, morganhousel, LizAnnSonders, fluentinfinance, iancassel, accentinvesting, awealthofcs, deepakshenoy, ajay_bagga, grahamstephan, michaelbatnick, arunstockguru, abnormalreturns, mashranivivek, investmattallen, valuestockgeek, investmenttalkk, lti_finance, petermallouk, gunavanthvaid, value_invest12, cathyhc, emmetlsavage, rwohlner, barbfriedberg, rossbaird, franseegull, arun_kumar_r, joelsolomon, coachchadcarson, lisagreenhall, andrewbeebe, financialmentor, kcicoletti, jessmatthewsca, iDesignStrategy, AswathDamodaran, EddyElfenbein, matt_levine, TheStalwart, tracyalloway, BillBrewsterTBB, buccocapital, Citrini7, MikeFritzell, RodAlzmann, CDInewsletter, ToffCap, StockJabber, MebFaber, EricBalchunas, profplum99, laurenbalik, lhamtil, Logos_LP, jonathanmaze, jasonschreier
+2025-04-09 17:50:59,922 - INFO - Monthly quota reset. Next reset on 2025-05-01
+2025-04-09 17:50:59,923 - WARNING - Can only process 3 accounts with available quota
+2025-04-09 17:50:59,923 - INFO - Processing 3 accounts with 3200 tweets per account
+2025-04-09 17:50:59,923 - INFO - Starting to scrape tweets for @markminervini
+2025-04-09 17:50:59,924 - INFO - Fetching tweets for @markminervini since ID 1907864990343901596
+2025-04-09 17:51:00,195 - INFO - Found user ID for @markminervini: 105353526
+2025-04-09 17:51:00,195 - DEBUG - user_timeline: 1 requests remaining until Wed Apr  9 18:05:59 2025
+2025-04-09 17:51:00,195 - INFO - Requesting 100 tweets for @markminervini (page 1/32)
+2025-04-09 17:51:00,629 - INFO - Processing page 1 for @markminervini
+2025-04-09 17:51:00,629 - INFO - Fetched 91 tweets from page 1 for @markminervini (Total: 91/3200)
+2025-04-09 17:51:00,629 - INFO - Saving batch of 91 tweets for @markminervini
+2025-04-09 17:51:00,630 - INFO - Saved 91 tweets for @markminervini to ../data/tweets/markminervini_tweets.csv
+2025-04-09 17:51:02,635 - DEBUG - user_timeline: 1 requests remaining until Wed Apr  9 18:05:59 2025
+2025-04-09 17:51:02,636 - INFO - Requesting 100 tweets for @markminervini (page 2/32)

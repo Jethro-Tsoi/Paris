@@ -36,7 +36,6 @@ def load_predictions(file_path):
     df = pd.read_csv(file_path)
     print(f"Loaded {len(df)} rows")
     
-    # Print some examples of timestamp format
     if 'timestamp' in df.columns:
         print("\nTimestamp format examples:")
         for ts in df['timestamp'].head(5):
